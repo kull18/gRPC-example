@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "gRPC-example/proto;proto";
+
+service UserService {
+    rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+}
+
+message SaveUserRequest {
+    string username = 2;
+    string password = 3;
+}
+
+message SaveUserResponse {
+    bool response = 1;
+    string message = 2;
+}
