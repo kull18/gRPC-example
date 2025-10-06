@@ -4,8 +4,24 @@ package user;
 
 option go_package = "gRPC-example/proto;proto";
 
-service UserService {
+import "google/protobuf/empty.proto";
+
+service UserCreateService {
     rpc SaveUser (SaveUserRequest) returns (SaveUserResponse);
+}
+
+service UserGetAllService {
+    rpc GetUsers (google.protobuf.Empty) returns (ListUserResponse);    
+}
+
+service UpdateUser {
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+}
+
+message User {
+    int32 ID = 1; 
+    string username = 2; 
+    string password = 3; 
 }
 
 message SaveUserRequest {
@@ -16,4 +32,14 @@ message SaveUserRequest {
 message SaveUserResponse {
     bool response = 1;
     string message = 2;
+}
+
+message ListUserResponse {
+    repeated User users = 1; 
+}
+
+message UpdateUser {
+    int32 ID = 1;
+    string message = 2; 
+    string password = 3; 
 }

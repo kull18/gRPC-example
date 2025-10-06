@@ -1,0 +1,27 @@
+package infraestructure
+
+import (
+	pb "gRPC-Example/proto"
+
+	"google.golang.org/grpc"
+)
+
+type UserRegister struct {
+	grpcServer *grpc.Server
+	createUserController *CreateUserController
+	getAllUsersController *GetAllUsersController
+}
+
+func NewUserRegister(createUserController *CreateUserController, getAllUsersController *GetAllUsersController, grpcServer *grpc.Server)  *UserRegister {
+	return  &UserRegister{
+		createUserController: createUserController,
+		getAllUsersController: getAllUsersController,
+		grpcServer: grpcServer,
+	}
+}
+
+
+func (register *UserRegister) Register() {
+	pb.RegisterUserCreateServiceServer(register.grpcServer, register.createUserController)
+	pb.RegisterUserGetAllServiceServer(register.grpcServer, register.getAllUsersController)
+}

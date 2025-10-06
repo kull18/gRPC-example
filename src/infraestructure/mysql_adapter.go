@@ -40,3 +40,32 @@ func (adapter *MysqlAdapter) Save(user *entities.User) error {
 
 	return nil
 }
+
+
+func (adapter *MysqlAdapter) ListAll() ([]entities.User, error) {
+	var users []entities.User
+
+	query := "SELECT * FROM users" 
+
+	prepare, err := adapter.conn.Prepare(query)
+	if err != nil {
+		return nil, fmt.Errorf("error preparando consulta: %v", err)
+	}
+	defer prepare.Close()
+
+	rows, err := prepare.Query()
+	if err != nil {
+		return nil, fmt.Errorf("error ejecutando consulta: %v", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var user entities.User
+		if err := rows.Scan(&user.ID, &user.Username, &user.Password); err != nil {
+			return nil, fmt.Errorf("error escaneando fila: %v", err)
+		}
+		users = append(users, user)
+	}
+
+	return users, nil
+}

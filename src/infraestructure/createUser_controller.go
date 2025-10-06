@@ -9,7 +9,7 @@ import (
 
 type CreateUserController struct {
 	uc *application.SaveUserUseCase
-	pb.UnimplementedUserServiceServer
+	pb.UnimplementedUserCreateServiceServer
 }
 
 func NewCreateUserController(uc *application.SaveUserUseCase) *CreateUserController {
