@@ -222,3 +222,105 @@ var UserGetAllService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "user.proto",
 }
+
+const (
+	UpdateUser_UpdateUser_FullMethodName = "/user.UpdateUser/UpdateUser"
+)
+
+// UpdateUserClient is the client API for UpdateUser service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type UpdateUserClient interface {
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+}
+
+type updateUserClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewUpdateUserClient(cc grpc.ClientConnInterface) UpdateUserClient {
+	return &updateUserClient{cc}
+}
+
+func (c *updateUserClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserResponse)
+	err := c.cc.Invoke(ctx, UpdateUser_UpdateUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// UpdateUserServer is the server API for UpdateUser service.
+// All implementations must embed UnimplementedUpdateUserServer
+// for forward compatibility.
+type UpdateUserServer interface {
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	mustEmbedUnimplementedUpdateUserServer()
+}
+
+// UnimplementedUpdateUserServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedUpdateUserServer struct{}
+
+func (UnimplementedUpdateUserServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUpdateUserServer) mustEmbedUnimplementedUpdateUserServer() {}
+func (UnimplementedUpdateUserServer) testEmbeddedByValue()                    {}
+
+// UnsafeUpdateUserServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to UpdateUserServer will
+// result in compilation errors.
+type UnsafeUpdateUserServer interface {
+	mustEmbedUnimplementedUpdateUserServer()
+}
+
+func RegisterUpdateUserServer(s grpc.ServiceRegistrar, srv UpdateUserServer) {
+	// If the following call pancis, it indicates UnimplementedUpdateUserServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&UpdateUser_ServiceDesc, srv)
+}
+
+func _UpdateUser_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UpdateUserServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UpdateUser_UpdateUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UpdateUserServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// UpdateUser_ServiceDesc is the grpc.ServiceDesc for UpdateUser service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var UpdateUser_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "user.UpdateUser",
+	HandlerType: (*UpdateUserServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateUser",
+			Handler:    _UpdateUser_UpdateUser_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "user.proto",
+}

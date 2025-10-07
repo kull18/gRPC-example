@@ -38,8 +38,13 @@ message ListUserResponse {
     repeated User users = 1; 
 }
 
-message UpdateUser {
+message UpdateUserRequest {
     int32 ID = 1;
-    string message = 2; 
+    string username = 2; 
     string password = 3; 
+}
+
+message UpdateUserResponse {
+    bool success = 1; 
+    string message = 2;  
 }
