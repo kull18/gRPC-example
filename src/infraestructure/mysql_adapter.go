@@ -69,3 +69,22 @@ func (adapter *MysqlAdapter) ListAll() ([]entities.User, error) {
 
 	return users, nil
 }
+
+
+func (adapter *MysqlAdapter)  Update(id int32, user *entities.User) error {
+	query := "UPDATE users SET username = ?, password = ? WHERE id = ?"
+
+	prepare, err := adapter.conn.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	_, errResult := prepare.Exec(user.Username, user.Password, id)
+
+	if errResult != nil {
+		return errResult
+	}
+
+	return nil
+}

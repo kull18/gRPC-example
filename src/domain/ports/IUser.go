@@ -5,4 +5,5 @@ import "gRPC-Example/src/domain/entities"
 type IUser interface {
 	Save(user *entities.User) error
 	ListAll() ([]entities.User, error)
+	Update(id int32, user *entities.User) error
 }

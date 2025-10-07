@@ -16,7 +16,7 @@ func NewSaveUserUseCase(iUser ports.IUser) *SaveUserUseCase {
 	}
 }
 
-func (uc *SaveUserUseCase)  run(user *entities.User) error {
+func (uc *SaveUserUseCase)  Run(user *entities.User) error {
 	err := uc.IUser.Save(user)
 
 	if err != nil {
