@@ -9,12 +9,17 @@ import (
 )
 
 func InitDependencies() {
+	//here is where i declare 
+
 	adapter := infraestructure.NewMysqlAdapter()
 	uc := application.NewSaveUserUseCase(adapter)
 	ctr := infraestructure.NewCreateUserController(uc)
 
 	ucList := application.NewListUsersUseCase(adapter)
 	ctrList := infraestructure.NewGetAllUsersController(ucList)
+
+	ucUpdateUser := application.NewUpdateUserUseCase(adapter)
+	ctrUpdateUser := infraestructure.NewUpdateUserController(ucUpdateUser)
 
 	lis, err := net.Listen("tcp", ":50051")
 
@@ -24,7 +29,7 @@ func InitDependencies() {
 
 	grpcServer := grpc.NewServer()
 
-	userRegister := infraestructure.NewUserRegister(ctr, ctrList, grpcServer)
+	userRegister := infraestructure.NewUserRegister(ctr, ctrList,  ctrUpdateUser,grpcServer)
 	userRegister.Register()
 
 	log.Print("Listen server grpc")
