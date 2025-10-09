@@ -18,6 +18,10 @@ service UpdateUser {
     rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
 }
 
+service DeleteUser {
+    rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse); 
+}
+
 message User {
     int32 ID = 1; 
     string username = 2; 
@@ -47,4 +51,13 @@ message UpdateUserRequest {
 message UpdateUserResponse {
     bool success = 1; 
     string message = 2;  
+}
+
+message DeleteUserRequest {
+    int32 ID = 1; 
+}
+
+message DeleteUserResponse {
+    bool success = 1; 
+    string message = 2; 
 }

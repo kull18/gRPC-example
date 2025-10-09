@@ -88,3 +88,23 @@ func (adapter *MysqlAdapter)  Update(id int32, user *entities.User) error {
 
 	return nil
 }
+
+func (adapter *MysqlAdapter) Delete(id int32) error {
+	query := "DELETE FROM users WHERE id = ?"
+
+	prepare, err := adapter.conn.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	defer prepare.Close()
+
+	_, errResult := prepare.Exec(id)
+
+	if errResult != nil {
+		return errResult
+	}
+
+	return nil
+}

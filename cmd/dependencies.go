@@ -21,6 +21,9 @@ func InitDependencies() {
 	ucUpdateUser := application.NewUpdateUserUseCase(adapter)
 	ctrUpdateUser := infraestructure.NewUpdateUserController(ucUpdateUser)
 
+	ucDeleteUser := application.NewDeleteUserUseCase(adapter)
+	ctrDeleteUser := infraestructure.NewDeleteUserController(ucDeleteUser)
+
 	lis, err := net.Listen("tcp", ":50051")
 
 	if err != nil {
@@ -29,7 +32,7 @@ func InitDependencies() {
 
 	grpcServer := grpc.NewServer()
 
-	userRegister := infraestructure.NewUserRegister(ctr, ctrList,  ctrUpdateUser,grpcServer)
+	userRegister := infraestructure.NewUserRegister(ctr, ctrList,  ctrUpdateUser, ctrDeleteUser,grpcServer)
 	userRegister.Register()
 
 	log.Print("Listen server grpc")
