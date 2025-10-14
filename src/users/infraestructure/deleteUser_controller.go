@@ -2,7 +2,7 @@ package infraestructure
 
 import (
 	"context"
-	"gRPC-Example/src/application"
+	"gRPC-Example/src/users/application"
 	pb "gRPC-Example/proto"
 )
 

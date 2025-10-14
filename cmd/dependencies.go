@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gRPC-Example/src/application"
-	"gRPC-Example/src/infraestructure"
+	"gRPC-Example/src/users/application"
+	"gRPC-Example/src/users/infraestructure"
 	"log"
 	"net"
 	"google.golang.org/grpc"

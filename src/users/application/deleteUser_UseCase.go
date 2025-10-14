@@ -1,6 +1,6 @@
 package application
 
-import "gRPC-Example/src/domain/ports"
+import "gRPC-Example/src/users/domain/ports"
 
 type DeleteUserUseCase struct {
 	repository ports.IUser

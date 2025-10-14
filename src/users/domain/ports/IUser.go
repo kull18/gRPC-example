@@ -1,6 +1,6 @@
 package ports
 
-import "gRPC-Example/src/domain/entities"
+import "gRPC-Example/src/users/domain/entities"
 
 type IUser interface {
 	Save(user *entities.User) error
