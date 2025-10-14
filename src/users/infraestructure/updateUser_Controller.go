@@ -3,8 +3,8 @@ package infraestructure
 import (
 	"context"
 	pb "gRPC-Example/proto"
-	"gRPC-Example/src/application"
-	"gRPC-Example/src/domain/entities"
+	"gRPC-Example/src/users/application"
+	"gRPC-Example/src/users/domain/entities"
 )
 
 type UpdateUserController struct {

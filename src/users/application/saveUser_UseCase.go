@@ -1,8 +1,8 @@
 package application
 
 import (
-	"gRPC-Example/src/domain/entities"
-	"gRPC-Example/src/domain/ports"
+	"gRPC-Example/src/users/domain/entities"
+	"gRPC-Example/src/users/domain/ports"
 )
 
 type SaveUserUseCase struct {

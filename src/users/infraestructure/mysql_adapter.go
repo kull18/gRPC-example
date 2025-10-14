@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"gRPC-Example/core"
-	"gRPC-Example/src/domain/entities"
+	"gRPC-Example/src/users/domain/entities"
 )
 
 type MysqlAdapter struct {
